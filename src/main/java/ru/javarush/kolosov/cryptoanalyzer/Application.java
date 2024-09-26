@@ -1,18 +1,12 @@
 package ru.javarush.kolosov.cryptoanalyzer;
 
-public class Application {
+abstract public class Application {
 
-
-
-    private Application() {}
-
-    public static Application run() {
-        return new Application();
-
+    public void run() {
 
     }
 
-    private void init() {
+    public void doCommand() {
 
     }
 }
