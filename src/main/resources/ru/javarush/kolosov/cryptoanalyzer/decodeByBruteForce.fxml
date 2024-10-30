@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="781.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.javarush.kolosov.cryptoanalyzer.controllers.BruteForceController">
+    <VBox alignment="TOP_CENTER" spacing="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <MenuBar>
+            <Menu mnemonicParsing="false" text="Меню">
+                <MenuItem mnemonicParsing="false" onAction="#toMainScreen" text="На главную" />
+            </Menu>
+        </MenuBar>
+
+        <VBox alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+
+            <Label text="Расшифровать методом BruteForce">
+                <font>
+                    <Font size="31.0" />
+                </font>
+            </Label>
+
+            <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefWidth="797.0">
+                <Label text="Выберите файл, который нужно расшифровать">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Button fx:id="selectFileBtn" onAction="#selectFile" text="Выбрать файл">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </VBox>
+
+            <Label fx:id="commonHelpBlock" text="Произошла ошибка" textFill="RED" visible="false">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <Button fx:id="submitBtn" onAction="#decodeByBruteForce" text="Расшифровать">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </VBox>
+
+        <VBox fx:id="resultBlock" alignment="BOTTOM_CENTER" spacing="10" visible="false" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <Label fx:id="labelResult" text="Обработка успешно завершена">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+
+            <Button fx:id="saveFileBtn" onAction="#downloadFile" text="Сохранить файл">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Button>
+        </VBox>
+
+    </VBox>
+</AnchorPane>
