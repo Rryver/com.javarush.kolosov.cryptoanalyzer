@@ -1,4 +1,4 @@
-module ru.javarush.kolosov.cryptoanalyzer {
+module com.javarush.kolosov.cryptoanalyzer {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,12 +9,12 @@ module ru.javarush.kolosov.cryptoanalyzer {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
 
-    opens ru.javarush.kolosov.cryptoanalyzer to javafx.fxml;
-    exports ru.javarush.kolosov.cryptoanalyzer;
-    exports ru.javarush.kolosov.cryptoanalyzer.controllers;
-    opens ru.javarush.kolosov.cryptoanalyzer.controllers to javafx.fxml;
-    exports ru.javarush.kolosov.cryptoanalyzer.helpers;
-    opens ru.javarush.kolosov.cryptoanalyzer.helpers to javafx.fxml;
-    exports ru.javarush.kolosov.cryptoanalyzer.frontend;
-    opens ru.javarush.kolosov.cryptoanalyzer.frontend to javafx.fxml;
+    opens com.javarush.kolosov.cryptoanalyzer to javafx.fxml;
+    exports com.javarush.kolosov.cryptoanalyzer;
+    exports com.javarush.kolosov.cryptoanalyzer.controllers;
+    opens com.javarush.kolosov.cryptoanalyzer.controllers to javafx.fxml;
+    exports com.javarush.kolosov.cryptoanalyzer.helpers;
+    opens com.javarush.kolosov.cryptoanalyzer.helpers to javafx.fxml;
+    exports com.javarush.kolosov.cryptoanalyzer.frontend;
+    opens com.javarush.kolosov.cryptoanalyzer.frontend to javafx.fxml;
 }
