@@ -7,15 +7,16 @@ import javafx.scene.layout.VBox;
 import ru.javarush.kolosov.cryptoanalyzer.Application;
 import ru.javarush.kolosov.cryptoanalyzer.analyzers.CaesarCipherBruteForceDecoder;
 import ru.javarush.kolosov.cryptoanalyzer.exceptions.BruteForceKeyNotFoundException;
-import ru.javarush.kolosov.cryptoanalyzer.helpers.FileManager;
+import ru.javarush.kolosov.cryptoanalyzer.helpers.FileHelper;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class BruteForceController extends BaseController {
 
     private Path inputFile;
-    private Path outputFile;
+    private ArrayList<Path> decodedFiles;
 
     @FXML
     public Button selectFileBtn;
@@ -34,7 +35,7 @@ public class BruteForceController extends BaseController {
 
     @FXML
     public void selectFile() {
-        File file = FileManager.openFile();
+        File file = FileHelper.showOpenDialog();
         if (file != null) {
             selectFileBtn.setText(file.getAbsoluteFile().toString());
             inputFile = file.toPath();
@@ -52,7 +53,6 @@ public class BruteForceController extends BaseController {
         }
 
         Path sourceFile = inputFile;
-        Path encodedFile = Path.of("files/encoded_" + inputFile.getFileName());
 
         try {
             CaesarCipherBruteForceDecoder bruteForceDecoder = new CaesarCipherBruteForceDecoder(Application.alphabets);
@@ -60,33 +60,36 @@ public class BruteForceController extends BaseController {
             disableInputFields();
             submitBtn.setText("Обработка...");
 
-            bruteForceDecoder.decode(sourceFile, encodedFile);
+            decodedFiles = bruteForceDecoder.decode(sourceFile);
         } catch (BruteForceKeyNotFoundException exception) {
             commonHelpBlock.setText(exception.getMessage());
             commonHelpBlock.setVisible(true);
             return;
         }
 
-        outputFile = encodedFile;
         resultBlock.setVisible(true);
-        labelResult.setText("Обработка завершена");
+        labelResult.setText(String.format("Обработка успешно завершена. Всего создано %s файлов", decodedFiles.size()));
+        if (decodedFiles.isEmpty()) {
+            saveFileBtn.setDisable(true);
+        }
     }
 
     @FXML
-    public void downloadFile() {
-        if (outputFile == null) {
+    public void downloadFiles() {
+        if (decodedFiles.isEmpty()) {
+            labelResult.setText("Нет файлов, которые нужно сохранить");
+            labelResult.setVisible(true);
             return;
         }
 
-        Path savedFile = FileManager.saveFile(outputFile);
-
+        Path savedFile = FileHelper.saveFiles(inputFile.toFile().getName(), decodedFiles);
         if (savedFile == null) {
             labelResult.setText("Не удалось сохранить файл");
             labelResult.setVisible(true);
             return;
         }
 
-        labelResult.setText("Файл " + savedFile.getFileName() + " успешно сохранен");
+        labelResult.setText(String.format("Файл %s успешно сохранен", savedFile.getFileName()));
         labelResult.setVisible(true);
     }
 

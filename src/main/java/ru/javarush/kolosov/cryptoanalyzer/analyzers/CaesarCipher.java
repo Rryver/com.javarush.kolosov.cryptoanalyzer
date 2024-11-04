@@ -1,7 +1,6 @@
 package ru.javarush.kolosov.cryptoanalyzer.analyzers;
 
 import ru.javarush.kolosov.cryptoanalyzer.exceptions.AlphabetException;
-import ru.javarush.kolosov.cryptoanalyzer.exceptions.InvalidKeyException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,13 @@ public class CaesarCipher implements Cipher {
             throw new AlphabetException("Не задан Алфавит");
         }
 
-        setKey(key);
+        int alphabetLength = this.sourceAlphabet.length;
+        key = key % alphabetLength;
+        if (key < 0) {
+            key = alphabetLength + key;
+        }
+
+        prepareAlphabet(key);
     }
 
     private void prepareAlphabet(int key) {
@@ -73,14 +78,6 @@ public class CaesarCipher implements Cipher {
 
     private Character decodeSymbol(char symbol) {
         return decodingAlphabet.getOrDefault(symbol, null);
-    }
-
-    public void setKey(int key) {
-        if (!Validator.validateKeyRange(key, sourceAlphabet)) {
-            throw new InvalidKeyException("Значение key должно быть от 1 до " + sourceAlphabet.length);
-        }
-
-        prepareAlphabet(key);
     }
 
     public char[] getSourceAlphabet() {

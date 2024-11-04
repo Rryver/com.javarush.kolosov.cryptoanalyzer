@@ -2,7 +2,6 @@ package ru.javarush.kolosov.cryptoanalyzer.analyzers;
 
 
 import ru.javarush.kolosov.cryptoanalyzer.exceptions.InvalidFileException;
-import ru.javarush.kolosov.cryptoanalyzer.helpers.FileManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,7 +19,7 @@ public class FileCipherService {
 
 
     public void encode(Path sourceFile, Path outputFile) {
-        if (!FileManager.isFileExists(sourceFile)) {
+        if (!Files.exists(sourceFile)) {
             throw new InvalidFileException("Исходного файла не существует");
         }
 
@@ -39,7 +38,7 @@ public class FileCipherService {
     }
 
     public void decode(Path sourceFile, Path outputFile) {
-        if (!FileManager.isFileExists(sourceFile)) {
+        if (!Files.exists(sourceFile)) {
             throw new InvalidFileException("Исходного файла не существует");
         }
 

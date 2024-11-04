@@ -62,13 +62,13 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
 
-            <Label fx:id="labelResult" text="Обработка успешно завершена">
+            <Label fx:id="labelResult" text="Обработка успешно завершена. Всего сгенерировано файлов (для кжадого)">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Label>
 
-            <Button fx:id="saveFileBtn" onAction="#downloadFile" text="Сохранить файл">
+            <Button fx:id="saveFileBtn" onAction="#downloadFiles" text="Сохранить файлы">
                 <font>
                     <Font size="16.0" />
                 </font>

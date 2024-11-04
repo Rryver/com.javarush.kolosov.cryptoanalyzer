@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import ru.javarush.kolosov.cryptoanalyzer.Application;
 import ru.javarush.kolosov.cryptoanalyzer.analyzers.CaesarCipher;
 import ru.javarush.kolosov.cryptoanalyzer.analyzers.FileCipherService;
-import ru.javarush.kolosov.cryptoanalyzer.helpers.FileManager;
+import ru.javarush.kolosov.cryptoanalyzer.helpers.FileHelper;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -37,7 +37,7 @@ public class DecodeController extends BaseController {
 
     @FXML
     public void selectFile() {
-        File file = FileManager.openFile();
+        File file = FileHelper.showOpenDialog();
         if (file != null) {
             selectFileBtn.setText(file.getAbsoluteFile().toString());
             inputFile = file.toPath();
@@ -54,6 +54,12 @@ public class DecodeController extends BaseController {
             return;
         }
 
+        if (keyInputField == null) {
+            commonHelpBlock.setText("Необходимо ввести ключ");
+            commonHelpBlock.setVisible(true);
+            return;
+        }
+
         int key;
         try {
             key = Integer.parseInt(keyInputField.getText());
@@ -64,7 +70,7 @@ public class DecodeController extends BaseController {
         }
 
         Path sourceFile = inputFile;
-        Path outputFile = Path.of("files/decoded_" + inputFile.getFileName());
+        Path outputFile = Path.of(String.format("%s/decoded_%s", FileHelper.fileStorageName, inputFile.getFileName()));
 
         try {
             FileCipherService fileCipherService = new FileCipherService(new CaesarCipher(key, Application.alphabets));
@@ -90,7 +96,7 @@ public class DecodeController extends BaseController {
             return;
         }
 
-        Path savedFile = FileManager.saveFile(outputFile);
+        Path savedFile = FileHelper.saveFile(outputFile);
 
         if (savedFile == null) {
             labelResult.setText("Не удалось сохранить файл");
@@ -98,7 +104,7 @@ public class DecodeController extends BaseController {
             return;
         }
 
-        labelResult.setText("Файл " + savedFile.getFileName() + " успешно сохранен");
+        labelResult.setText(String.format("Файл %s успешно сохранен", savedFile.getFileName()));
         labelResult.setVisible(true);
     }
 

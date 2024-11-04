@@ -1,6 +1,4 @@
 module ru.javarush.kolosov.cryptoanalyzer {
-    requires info.picocli;
-
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
