@@ -13,6 +13,9 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * Контроллер экрана "шифрования методом BruteForce"
+ */
 public class BruteForceController extends BaseController {
 
     private Path inputFile;
@@ -22,7 +25,7 @@ public class BruteForceController extends BaseController {
     public Button selectFileBtn;
 
     @FXML
-    public Button submitBtn;
+    public Button submitFormBtn;
     @FXML
     public Label commonHelpBlock;
 
@@ -34,7 +37,7 @@ public class BruteForceController extends BaseController {
     public Button saveFileBtn;
 
     @FXML
-    public void selectFile() {
+    public void actionSelectFile() {
         File file = FileHelper.showOpenDialog();
         if (file != null) {
             selectFileBtn.setText(file.getAbsoluteFile().toString());
@@ -43,7 +46,7 @@ public class BruteForceController extends BaseController {
     }
 
     @FXML
-    public void decodeByBruteForce() {
+    public void actionDecodeByBruteForce() {
         hideHelpBlocks();
 
         if (inputFile == null) {
@@ -58,7 +61,7 @@ public class BruteForceController extends BaseController {
             CaesarCipherBruteForceDecoder bruteForceDecoder = new CaesarCipherBruteForceDecoder(Application.alphabets);
 
             disableInputFields();
-            submitBtn.setText("Обработка...");
+            submitFormBtn.setText("Обработка...");
 
             decodedFiles = bruteForceDecoder.decode(sourceFile);
         } catch (BruteForceKeyNotFoundException exception) {
@@ -75,14 +78,14 @@ public class BruteForceController extends BaseController {
     }
 
     @FXML
-    public void downloadFiles() {
+    public void actionDownloadFiles() {
         if (decodedFiles.isEmpty()) {
             labelResult.setText("Нет файлов, которые нужно сохранить");
             labelResult.setVisible(true);
             return;
         }
 
-        Path savedFile = FileHelper.saveFiles(inputFile.toFile().getName(), decodedFiles);
+        Path savedFile = FileHelper.saveFilesToUserDirectory(inputFile.toFile().getName(), decodedFiles);
         if (savedFile == null) {
             labelResult.setText("Не удалось сохранить файл");
             labelResult.setVisible(true);
@@ -98,8 +101,8 @@ public class BruteForceController extends BaseController {
     }
 
     private void clearSubmitBtn() {
-        submitBtn.setText("Зашифровать");
-        submitBtn.setDisable(false);
+        submitFormBtn.setText("Зашифровать");
+        submitFormBtn.setDisable(false);
     }
 
     private void clearFields() {
@@ -120,7 +123,7 @@ public class BruteForceController extends BaseController {
     }
 
     private void disableInputFields() {
-        submitBtn.setDisable(true);
+        submitFormBtn.setDisable(true);
         selectFileBtn.setDisable(true);
     }
 }

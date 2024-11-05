@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.nio.file.Path;
 
+/**
+ * Контроллер экрана "Расшифровка по заданному ключу"
+ */
 public class DecodeController extends BaseController {
 
     private Path inputFile;
@@ -24,7 +27,7 @@ public class DecodeController extends BaseController {
     public TextField keyInputField;
 
     @FXML
-    public Button submitBtn;
+    public Button submitFormBtn;
     @FXML
     public Label commonHelpBlock;
 
@@ -36,7 +39,7 @@ public class DecodeController extends BaseController {
     public Button saveFileBtn;
 
     @FXML
-    public void selectFile() {
+    public void actionSelectFile() {
         File file = FileHelper.showOpenDialog();
         if (file != null) {
             selectFileBtn.setText(file.getAbsoluteFile().toString());
@@ -45,7 +48,7 @@ public class DecodeController extends BaseController {
     }
 
     @FXML
-    public void decodeByKey() {
+    public void actionDecodeByKey() {
         hideHelpBlocks();
 
         if (inputFile == null) {
@@ -76,7 +79,7 @@ public class DecodeController extends BaseController {
             FileCipherService fileCipherService = new FileCipherService(new CaesarCipher(key, Application.alphabets));
 
             disableInputFields();
-            submitBtn.setText("Обработка...");
+            submitFormBtn.setText("Обработка...");
 
             fileCipherService.decode(sourceFile, outputFile);
         } catch (RuntimeException exception) {
@@ -91,12 +94,12 @@ public class DecodeController extends BaseController {
     }
 
     @FXML
-    public void downloadFile() {
+    public void actionDownloadFile() {
         if (outputFile == null) {
             return;
         }
 
-        Path savedFile = FileHelper.saveFile(outputFile);
+        Path savedFile = FileHelper.saveFileToUserDirectory(outputFile);
 
         if (savedFile == null) {
             labelResult.setText("Не удалось сохранить файл");
@@ -113,8 +116,8 @@ public class DecodeController extends BaseController {
     }
 
     private void clearSubmitBtn() {
-        submitBtn.setText("Зашифровать");
-        submitBtn.setDisable(false);
+        submitFormBtn.setText("Зашифровать");
+        submitFormBtn.setDisable(false);
     }
 
     private void clearFields() {
@@ -136,7 +139,7 @@ public class DecodeController extends BaseController {
     }
 
     private void disableInputFields() {
-        submitBtn.setDisable(true);
+        submitFormBtn.setDisable(true);
         selectFileBtn.setDisable(true);
         keyInputField.setDisable(true);
     }

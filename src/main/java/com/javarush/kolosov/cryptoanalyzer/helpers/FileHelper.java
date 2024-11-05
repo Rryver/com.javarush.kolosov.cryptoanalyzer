@@ -27,7 +27,7 @@ public class FileHelper {
         return fileChooser.showSaveDialog(Application.getInstance().getSceneManager().getPrimaryStage());
     }
 
-    public static Path saveFile(Path source) {
+    public static Path saveFileToUserDirectory(Path source) {
         File file = showSaveDialog(source.getFileName().toString());
 
         if (file != null) {
@@ -42,8 +42,8 @@ public class FileHelper {
         return null;
     }
 
-    public static Path saveFiles(String outputZipName, ArrayList<Path> files) {
-        Path zipFile = zipFiles(outputZipName, files);
+    public static Path saveFilesToUserDirectory(String outputZipName, ArrayList<Path> files) {
+        Path zipFile = filesToZip(outputZipName, files);
         if (zipFile == null) {
             return null;
         }
@@ -61,7 +61,7 @@ public class FileHelper {
         return null;
     }
 
-    public static Path zipFiles(String outputZipName, ArrayList<Path> files) {
+    public static Path filesToZip(String outputZipName, ArrayList<Path> files) {
         if (files.isEmpty()) {
             return null;
         }

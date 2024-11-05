@@ -31,7 +31,7 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Button fx:id="selectFileBtn" onAction="#selectFile" text="Выбрать файл">
+                <Button fx:id="selectFileBtn" onAction="#actionSelectFile" text="Выбрать файл">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -61,7 +61,7 @@
                     <Font size="14.0" />
                 </font>
             </Label>
-            <Button fx:id="submitBtn" onAction="#encodeByKey" text="Зашифровать">
+            <Button fx:id="submitFormBtn" onAction="#actionEncodeByKey" text="Зашифровать">
                 <font>
                     <Font size="18.0" />
                 </font>
@@ -82,7 +82,7 @@
                 </font>
             </Label>
 
-            <Button fx:id="saveFileBtn" onAction="#downloadFile" text="Сохранить файл">
+            <Button fx:id="saveFileBtn" onAction="#actionDownloadFile" text="Сохранить файл">
                 <font>
                     <Font size="16.0" />
                 </font>

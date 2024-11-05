@@ -24,17 +24,17 @@
                     <Font size="31.0" />
                 </font>
             </Label>
-            <Button fx:id="toEncodeByKeyBtn" onAction="#openEncodeByKeyScreen" text="Закодировать по ключу">
+            <Button fx:id="toEncodeByKeyBtn" onAction="#actionOpenEncodeByKeyScreen" text="Закодировать по ключу">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Button>
-            <Button fx:id="toDecodeByKeyBtn" onAction="#openDecodeByKeyScreen" text="Раскодировать по ключу">
+            <Button fx:id="toDecodeByKeyBtn" onAction="#actionOpenDecodeByKeyScreen" text="Раскодировать по ключу">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Button>
-            <Button fx:id="toDecodeByBruteForceBtn" onAction="#openDecodeByBruteForceScreen" text="Раскодировать методом Brute Force">
+            <Button fx:id="toDecodeByBruteForceBtn" onAction="#actionOpenDecodeByBruteForceScreen" text="Раскодировать методом Brute Force">
                 <font>
                     <Font size="20.0" />
                 </font>

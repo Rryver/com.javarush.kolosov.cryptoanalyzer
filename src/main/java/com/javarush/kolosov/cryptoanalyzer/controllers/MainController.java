@@ -14,17 +14,17 @@ public class MainController extends BaseController {
     public Button toDecodeByBruteForceBtn;
 
     @FXML
-    public void openEncodeByKeyScreen() {
+    public void actionOpenEncodeByKeyScreen() {
         renderScreen(Scenes.ENCODE_BY_KEY);
     }
 
     @FXML
-    public void openDecodeByKeyScreen() {
+    public void actionOpenDecodeByKeyScreen() {
         renderScreen(Scenes.DECODE_BY_KEY);
     }
 
     @FXML
-    public void openDecodeByBruteForceScreen() {
+    public void actionOpenDecodeByBruteForceScreen() {
         renderScreen(Scenes.DECODE_BY_BRUTE_FORCE);
     }
 }
