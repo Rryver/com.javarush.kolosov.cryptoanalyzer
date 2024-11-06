@@ -11,8 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class CaesarCipherBruteForceDecoder {
-    private final String[] validationRegExs = {"[.,-:]\\s\\S"};
-
     private final char[][] alphabets;
 
     public CaesarCipherBruteForceDecoder(char[]... alphabets) {
@@ -29,7 +27,7 @@ public class CaesarCipherBruteForceDecoder {
         for (int key = 1; key < Alphabets.merge(alphabets).length; key++) {
             CaesarCipher caesarCipher = new CaesarCipher(key, alphabets);
 
-            Path decodedFile = Path.of(String.format("%s/bruteForce_%d_%s", FileHelper.fileStorageName, key, sourceFile.getFileName()));
+            Path decodedFile = Path.of(String.format("%s/bruteForce_key_%d_%s", FileHelper.fileStorageName, key, sourceFile.getFileName()));
             try (BufferedReader reader = Files.newBufferedReader(sourceFile);
                  BufferedWriter writer = Files.newBufferedWriter(decodedFile)) {
                 while (reader.ready()) {
@@ -47,17 +45,4 @@ public class CaesarCipherBruteForceDecoder {
 
         return decodedFiles;
     }
-
-//    private boolean validateFile(Path str) {
-//        for (String regEx : validationRegExs) {
-//            Pattern pattern = Pattern.compile(regEx);
-//            Matcher matcher = pattern.matcher(str);
-//
-//            if (matcher.find()) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
 }

@@ -6,13 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Stack;
 
 public class SceneManager {
 
     private final Stage primaryStage;
-
-    private final Stack<Scene> scenesStack = new Stack<>();
 
     public SceneManager(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -20,7 +17,7 @@ public class SceneManager {
 
     public Scene loadScene(Scenes scene) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(String.format("/scenes/%s", scene.getSceneName())));
-        Parent root = null;
+        Parent root;
 
         try {
             root = fxmlLoader.load();

@@ -21,13 +21,10 @@ public class Application extends javafx.application.Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         this.sceneManager = new SceneManager(primaryStage);
-
         primaryStage.setTitle("КриптоАнализатор");
-
         this.sceneManager.renderScene(Scenes.MAIN);
-
         primaryStage.show();
     }
 

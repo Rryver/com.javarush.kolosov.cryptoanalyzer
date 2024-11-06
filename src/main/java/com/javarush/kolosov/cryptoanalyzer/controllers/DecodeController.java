@@ -115,29 +115,6 @@ public class DecodeController extends BaseController {
         commonHelpBlock.setVisible(false);
     }
 
-    private void clearSubmitBtn() {
-        submitFormBtn.setText("Зашифровать");
-        submitFormBtn.setDisable(false);
-    }
-
-    private void clearFields() {
-        inputFile = null;
-        selectFileBtn.setText("Выбрать файл");
-        keyInputField.setText(null);
-    }
-
-    private void clearResults() {
-        labelResult.setText(null);
-        resultBlock.setVisible(false);
-    }
-
-    private void clearForm() {
-        hideHelpBlocks();
-        clearSubmitBtn();
-        clearFields();
-        clearResults();
-    }
-
     private void disableInputFields() {
         submitFormBtn.setDisable(true);
         selectFileBtn.setDisable(true);
